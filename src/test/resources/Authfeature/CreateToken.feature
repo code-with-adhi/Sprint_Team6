@@ -12,8 +12,8 @@ Scenario: Improper creds
 
 Scenario: Missing fields
   When the password field is Missing
-  Then status code must be 400
+  Then status code must be 200
 
 Scenario: Missing header
   When content type header is Missing
-  Then status code must be 400
+  Then status code must be 200

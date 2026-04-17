@@ -1,0 +1,19 @@
+package delete.TestRunner;
+
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+@RunWith(Cucumber.class)
+	@CucumberOptions(
+	        features = "src/test/resources/deletefeaturefile/deleteBooking.feature",
+	        glue = "delete.StepDefinition",
+	        plugin = {"pretty", "html:target/deleteBooking cucumber-report.html"},
+	        monochrome = true
+	)
+
+
+		public class DeleteTestRunner {
+
+	}
+

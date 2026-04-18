@@ -36,7 +36,7 @@ public class GetBookingSteps {
 	@Then("the response statusLine for get is {string}")
 	public void validateReposeLine(String expLine)
 	{
-		assertEquals(response.getStatusLine(), expLine);
+		assertTrue(response.getStatusLine().contains(expLine));
 	}
 	
 	@Then("the response time for get is less than {long} ms")

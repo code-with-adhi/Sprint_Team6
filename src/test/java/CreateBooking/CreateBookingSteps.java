@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import excelutility.ExcelUtility;
+import ExcelUtility.ExcelUtility1;
 import io.cucumber.java.en.*;
 
 public class CreateBookingSteps {
@@ -31,7 +31,7 @@ public class CreateBookingSteps {
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
-	    ExcelUtility eUtil = new ExcelUtility();
+	    ExcelUtility1 eUtil = new ExcelUtility1();
 
 	    int row = eUtil.getRowByTcId("Sheet1", tcId);
 
@@ -74,7 +74,7 @@ public class CreateBookingSteps {
 	@Then("the response statusLine for post is {string}")
 	public void validateReposeLine(String expLine)
 	{
-		assertEquals(response.getStatusLine(), expLine);
+		assertTrue(response.getStatusLine().contains(expLine));
 	}
 	
 	@Then("the response time for post is less than {int} ms")

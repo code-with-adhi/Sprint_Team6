@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 	    features = "src/test/resources/GetFeatureFile.feature",
-	    glue = "getBooking",
+	    glue = "GetBookingByID",
 	    plugin = {"pretty", "html:target/GetBooking_POST_Report.html"},
 	    monochrome = true
 	)

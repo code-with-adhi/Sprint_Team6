@@ -31,7 +31,7 @@ public class CreateBookingSteps {
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
-	    ExcelUtility1 eUtil = new ExcelUtility1();
+	    ExcelUtility1 eUtil = new ExcelUtility1("bookingData.xlsx");
 
 	    int row = eUtil.getRowByTcId("Sheet1", tcId);
 

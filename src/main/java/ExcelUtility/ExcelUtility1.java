@@ -9,7 +9,7 @@ public class ExcelUtility1 {
 
     private Workbook wb;
 
-    public void ExcelUtility(String fileName) throws Exception {
+    public ExcelUtility1(String fileName) throws Exception {
         InputStream fis = getClass().getClassLoader()
                 .getResourceAsStream("testdata/" + fileName);
         wb = WorkbookFactory.create(fis);

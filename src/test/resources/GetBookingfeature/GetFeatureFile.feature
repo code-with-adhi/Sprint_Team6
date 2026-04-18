@@ -25,7 +25,7 @@ Scenario Outline: TC_11 Validate booking data is returned
     And the get response should contain Booking Object
     Examples:
     |id|
-    |85|
+    |100|
 
 
 @TC_12
@@ -49,9 +49,8 @@ Scenario Outline: TC_13 Validate booking response data values
     And the fields values should match expected data "<firstname>","<lastname>",<totalprice>,"<depositpaid>","<checkin>","<checkout>","<additionalneeds>"
    Examples:
    Examples:
-| id  | firstname | lastname | totalprice | depositpaid | checkin    | checkout   | additionalneeds        |
-| 200 | Jane      | Doe      | 111        | true        | 2018-01-01 | 2019-01-01 | Extra pillows please   |
-
+  |id| firstname | lastname | totalprice | depositpaid | checkin     | checkout    | additionalneeds |
+  |100| John      | Smith    | 111        | true        | 2018-01-01  | 2019-01-01  | Breakfast       |
 @TC_14
 Scenario Outline: TC_14 Get error for invalid booking id
     When the user send GET request with "/<id>"

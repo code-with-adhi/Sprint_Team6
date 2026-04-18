@@ -28,6 +28,19 @@ public class updateStepDefinition {
     String lastname;
     boolean depositpaid;
 
+    @Given("Generate valid authentication token")
+    public void Generate_valid_authentication_token() {
+        String body = "{\r\n" + //
+        "    \"username\" : \"admin\",\r\n" + //
+        "    \"password\" : \"password123\"\r\n" + //
+        "}";
+        response = RestAssured.given().contentType(ContentType.JSON).body(body)
+        .when().post("/auth");
+
+        token = response.jsonPath().getString("token");
+        // Token.setToken(token);
+    }
+
     @Given("Create a new booking")
     public void create_booking() {
 
@@ -185,7 +198,7 @@ public class updateStepDefinition {
 
         return given()
                 .contentType(ContentType.JSON)
-                .cookie("token", Token.getToken())
+                .cookie("token", token)
                 .body(body)
                 .put("/booking/" + id);
     }
@@ -221,4 +234,6 @@ public class updateStepDefinition {
     public void validate_depositpaid() {
         assertEquals(depositpaid, response.jsonPath().getBoolean("depositpaid"));
     }
+
+    
 }

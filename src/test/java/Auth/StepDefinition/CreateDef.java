@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import static org.hamcrest.Matchers.hasKey;
+import file_utility.Token;
 
 public class CreateDef {
     Response response;
@@ -78,6 +79,7 @@ public class CreateDef {
     public void token_must_be_generated() {
         response.then().body("$",hasKey("token")).log().all();
         token = response.jsonPath().getString("token");
+        Token.setToken(token);
         Assert.assertEquals(token.length(), 15);
         response.then().log().all();
         

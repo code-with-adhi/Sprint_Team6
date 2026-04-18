@@ -15,10 +15,9 @@ public class deleteBooking {
     Response response;
     static String BASE_URL;
     String authToken;
-    String bookingId; // Ensure this ID exists in your API
+    String bookingId; 
     FileUtility fLib = new FileUtility();
 
-    // Helper method to ensure URL is always loaded
     public void loadUrl() throws IOException {
         if (BASE_URL == null) {
             BASE_URL = fLib.getDataFromPropertiesFile("baseurl");
@@ -29,7 +28,7 @@ public class deleteBooking {
     @Given("the API is up and booking exists")
     public void the_api_is_up_and_booking_exists() throws IOException {
         loadUrl();
-      // ✅ ALWAYS keep this (sets baseURI)
+
 
             response = given()
                 .contentType(ContentType.JSON)
@@ -37,13 +36,13 @@ public class deleteBooking {
                 .when()
                 .post("/booking");
 
-            bookingId = response.jsonPath().getString("bookingid"); // ✅ dynamic ID
+            bookingId = response.jsonPath().getString("bookingid"); 
         }
     
 
     @Given("I have a valid authentication token")
     public void i_have_a_valid_authentication_token() throws IOException {
-        loadUrl(); // Fix: ensure baseURI is set before calling given()
+        loadUrl(); 
         authToken = given()
             .contentType(ContentType.JSON)
             .body("{ \"username\" : \"admin\", \"password\" : \"password123\" }")
@@ -96,7 +95,7 @@ public class deleteBooking {
     @Then("the response message should be {string}")
     public void the_response_message_should_be(String expectedMsg) {
         String body = response.getBody().asString();
-        // "Created" is the standard response for deleting in Restful-Booker
+      
         assertTrue(body.contains(expectedMsg));
     }
 }

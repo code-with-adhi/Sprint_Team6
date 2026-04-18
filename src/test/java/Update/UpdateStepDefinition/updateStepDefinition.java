@@ -9,6 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.junit.Assert.*;
 
 import ExcelUtility.excelUtility;
+import file_utility.Token;
 
 public class updateStepDefinition {
 
@@ -50,18 +51,7 @@ public class updateStepDefinition {
         bookingId = response.jsonPath().getInt("bookingid");
     }
 
-    @Given("Generate valid authentication token")
-    public void generate_valid_token() {
-
-        String authBody = "{ \"username\":\"admin\", \"password\":\"password123\" }";
-
-        response = given()
-                .contentType(ContentType.JSON)
-                .body(authBody)
-                .post("/auth");
-
-        token = response.jsonPath().getString("token");
-    }
+    
 
     @When("Send PUT request with complete valid body")
     public void send_put_request_with_complete_valid_body() throws Exception {
@@ -195,7 +185,7 @@ public class updateStepDefinition {
 
         return given()
                 .contentType(ContentType.JSON)
-                .cookie("token", token)
+                .cookie("token", Token.getToken())
                 .body(body)
                 .put("/booking/" + id);
     }

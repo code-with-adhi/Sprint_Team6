@@ -1,4 +1,4 @@
-#Author: Prithibha
+
 Feature: Validate Complete Updation of Booking using PUT
 
   Background:

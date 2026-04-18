@@ -1,14 +1,18 @@
 package Auth.StepDefinition;
 
+import org.junit.Assert;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import static org.hamcrest.Matchers.hasKey;
 
 public class CreateDef {
     Response response;
+    static String token;
 
     @Given("Base URI is set to create the token")
     public void setURI(){
@@ -72,18 +76,25 @@ public class CreateDef {
 
     @Then("token must be generated")
     public void token_must_be_generated() {
+        response.then().body("$",hasKey("token")).log().all();
+        token = response.jsonPath().getString("token");
+        Assert.assertEquals(token.length(), 15);
         response.then().log().all();
+        
     }
 
     @Then("status code must be {int} and reason must be displayed")
     public void status_code_must_be_and_reason_must_be_displayed(int i) {
-        response.then().log().all();
+        response.then().assertThat().statusCode(i).body("$",hasKey("reason")).log().all();
+        String res = response.jsonPath().getString("reason");
+        Assert.assertEquals(res, "Bad credentials");   
     }
 
 
     @Then("status code must be {int}")
     public void status_code_must_be(int i) {
-        response.then().log().all();
+        response.then().assertThat().statusCode(i).log().all();
+        // response.then().log().all();
     }
 
     

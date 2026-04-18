@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.*;
 import static org.junit.Assert.*;
 import file_utility.Token;
+
 public class PartialUpdateStepDef {
 
     static {
@@ -22,7 +23,19 @@ public class PartialUpdateStepDef {
     String lastname;
     boolean depositpaid;
 
-    
+    @Given("Generate PATCH valid authentication token")
+    public void Generate_valid_authentication_token() {
+        String body = "{\r\n" + //
+                "    \"username\" : \"admin\",\r\n" + //
+                "    \"password\" : \"password123\"\r\n" + //
+                "}";
+        response = RestAssured.given().contentType(ContentType.JSON).body(body)
+                .when().post("/auth");
+
+        token = response.jsonPath().getString("token");
+        // Token.setToken(token);
+    }
+
     @Given("Create a new booking")
     public void create_booking() {
 
@@ -104,7 +117,7 @@ public class PartialUpdateStepDef {
     public Response sendPatch(String body, String token) {
         return given()
                 .contentType(ContentType.JSON)
-                .cookie("token", Token.getToken())
+                .cookie("token", token)
                 .body(body)
                 .patch("/booking/" + bookingId);
     }

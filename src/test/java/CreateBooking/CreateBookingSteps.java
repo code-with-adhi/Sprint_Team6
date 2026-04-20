@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,17 +17,18 @@ public class CreateBookingSteps {
 
 	Response response;
 	long respTime;
-	Map<String, Object> body = new HashMap<>();
-	Map<String, String> bookingDates = new HashMap<>();
-
+	Map<String, Object> body;
+	Map<String, String> bookingDates;
+    ExcelUtility1 eUtil;
 	
 	@io.cucumber.java.Before
-	public void setBaseURL() throws IOException
+	public void setBaseURL() throws Exception
 	{
 		
 			FileUtility fLib = new FileUtility(); 
 		    baseURI = fLib.getDataFromPropertiesFile("baseurl");
-		    System.out.println(baseURI);
+		   // System.out.println(baseURI);
+		    eUtil = new ExcelUtility1("bookingData.xlsx");
 	
 	}
 	
@@ -43,7 +43,6 @@ public class CreateBookingSteps {
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
-	    ExcelUtility1 eUtil = new ExcelUtility1("bookingData.xlsx");
 
 	    int row = eUtil.getRowByTcId("Sheet1", tcId);
 
@@ -55,7 +54,9 @@ public class CreateBookingSteps {
 	    String checkout = eUtil.getDataFromExcel("Sheet1", row, 6);
 	    String additionalneeds = eUtil.getDataFromExcel("Sheet1", row, 7);
 
-	   
+	    body = new HashMap<>();
+	    bookingDates = new HashMap<>();
+	    
 	    bookingDates.put("checkin", checkin);
 	    bookingDates.put("checkout", checkout);
 
@@ -106,6 +107,7 @@ public class CreateBookingSteps {
 	{
 		assertNotNull(response.jsonPath().get("booking"));
 	}
+	
 	 @Then("Validate the post response matches request data")
 	    public void validateResponseMatchesRequest() {
 

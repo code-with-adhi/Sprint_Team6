@@ -21,7 +21,7 @@ public class GetBookingSteps {
 		
 			FileUtility fLib = new FileUtility(); 
 		    baseURI = fLib.getDataFromPropertiesFile("baseurl");
-		    System.out.println(baseURI);
+		    //System.out.println(baseURI);
 	
 	}
 	
@@ -39,7 +39,7 @@ public class GetBookingSteps {
 		response = given()
 	            .when()
 	            .get(endpoint);
-	    response.then().log().all();
+	    //response.then().log().all();
 	    respTime=response.getTime();
 
 	}

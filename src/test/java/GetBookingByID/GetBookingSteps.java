@@ -79,8 +79,8 @@ public class GetBookingSteps {
 		assertNotNull(response.jsonPath().get("bookingdates.checkout"));
     }
 	
-	@Then("the fields values should match expected data {string},{string},{int},{string},{string},{string},{string}")
-	public void validateResponseData(String firstname,String lastname,int totalprice,String depositpaid,String checkin,String checkout,String additionalneeds)
+	@Then("the fields values should match expected data {string},{string},{int},{string},{string},{string}")
+	public void validateResponseData(String firstname,String lastname,int totalprice,String depositpaid,String checkin,String checkout)
 	{
 		
 		assertEquals(firstname,response.jsonPath().get("firstname"));

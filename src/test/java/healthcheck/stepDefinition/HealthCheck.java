@@ -1,6 +1,6 @@
 package healthcheck.stepDefinition;
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.*;
+import static org.testng.Assert.*;
 
 import file_utility.FileUtility;
 import io.restassured.response.Response;

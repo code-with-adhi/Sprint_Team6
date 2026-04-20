@@ -7,8 +7,8 @@ import io.restassured.response.Response;
 import file_utility.FileUtility;
 import java.io.IOException;
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import file_utility.Token;
 public class deleteBooking {
 

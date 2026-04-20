@@ -13,7 +13,7 @@ public class HealthCheck {
 
 	   FileUtility fUtil = new FileUtility();
 
-	    // ---------- GIVEN ----------
+	    
 
 	    @Given("the API is up")
 	    public void the_api_is_up() throws Exception {
@@ -32,7 +32,7 @@ public class HealthCheck {
 	        
 	    }
 
-	    // ---------- WHEN ----------
+	   
 
 	    @When("I send a GET request to {string}")
 	    public void i_send_a_get_request_to(String endpoint) {
@@ -55,7 +55,7 @@ public class HealthCheck {
 	        }
 	    }
 
-	    // ---------- THEN ----------
+	    
 
 	    @Then("the response status code should be {int}")
 	    public void the_response_status_code_should_be(Integer expectedStatusCode) {

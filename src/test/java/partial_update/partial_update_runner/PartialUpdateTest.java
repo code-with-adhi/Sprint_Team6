@@ -7,5 +7,5 @@ import io.cucumber.testng.CucumberOptions;
 glue = {"partial_update.partial_update_step_def","Hooks"}, 
 plugin = {
                 "pretty", "html:target/partialUpdation-report.html" }, monochrome = true)
-public class PartialUpdateRunner extends AbstractTestNGCucumberTests {
+public class PartialUpdateTest extends AbstractTestNGCucumberTests {
 }

@@ -9,9 +9,10 @@ import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 //import file_utility.Token;
 
+import file_utility.Token;
+
 public class PartialUpdateStepDef {
 
-    
     String token;
     int bookingId;
     Response response;
@@ -30,6 +31,8 @@ public class PartialUpdateStepDef {
                 .when().post("/auth");
 
         token = response.jsonPath().getString("token");
+
+        Token.setToken(token);
         // Token.setToken(token);
     }
 
@@ -114,7 +117,7 @@ public class PartialUpdateStepDef {
     public Response sendPatch(String body, String token) {
         return given()
                 .contentType(ContentType.JSON)
-                .cookie("token", token)
+                .cookie("token", Token.getToken())
                 .body(body)
                 .patch("/booking/" + bookingId);
     }

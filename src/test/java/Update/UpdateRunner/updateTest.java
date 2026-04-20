@@ -8,5 +8,5 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = "src/test/resources/UpdateFeature/updateFeature.feature", glue = {"Update.UpdateStepDefinition","Hooks"}, plugin = {
         "pretty", "html:target/sprint-report.html" }, monochrome = true)
-public class updateRunner extends AbstractTestNGCucumberTests {
+public class updateTest extends AbstractTestNGCucumberTests {
 }

@@ -15,6 +15,6 @@ import io.cucumber.testng.CucumberOptions;
         monochrome = true
 )
 
-public class GetAll_IdRun extends AbstractTestNGCucumberTests{
+public class GetAll_IdTest extends AbstractTestNGCucumberTests{
     
 }

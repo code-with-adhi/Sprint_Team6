@@ -11,6 +11,6 @@ import io.cucumber.testng.CucumberOptions;
 	    monochrome = true
 	)
 
-public class GetBookingRunner extends AbstractTestNGCucumberTests {
+public class GetBookingTest extends AbstractTestNGCucumberTests {
 
 }

@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
 	    plugin = {"pretty", "html:target/CreateBooking_POST_Report.html"},
 	    monochrome = true
 	)
-public class CreateBookingRunner extends AbstractTestNGCucumberTests {
+public class CreateBookingTest extends AbstractTestNGCucumberTests {
 
 }
 

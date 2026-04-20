@@ -14,5 +14,5 @@ import io.cucumber.testng.CucumberOptions;
         },
         monochrome = true
 )
-public class AuthRunner extends AbstractTestNGCucumberTests{
+public class AuthTest extends AbstractTestNGCucumberTests{
 }

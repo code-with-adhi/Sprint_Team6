@@ -11,10 +11,7 @@ import static org.testng.Assert.*;
 
 public class PartialUpdateStepDef {
 
-    static {
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
-    }
-
+    
     String token;
     int bookingId;
     Response response;

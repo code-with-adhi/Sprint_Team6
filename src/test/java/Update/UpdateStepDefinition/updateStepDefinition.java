@@ -13,9 +13,6 @@ import ExcelUtility.excelUtility;
 
 public class updateStepDefinition {
 
-    static {
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
-    }
 
     excelUtility eUtil = new excelUtility();
 

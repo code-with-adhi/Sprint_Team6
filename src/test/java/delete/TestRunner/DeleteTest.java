@@ -9,5 +9,5 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "html:target/deleteBooking-cucumber-report.html"},
         monochrome = true
 )
-public class DeleteTestRunner extends AbstractTestNGCucumberTests {
+public class DeleteTest extends AbstractTestNGCucumberTests {
 }

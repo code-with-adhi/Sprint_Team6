@@ -9,5 +9,5 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "html:target/healthcheck-cucumber-report.html"},
         monochrome = true
 )
-public class HealthCheck extends AbstractTestNGCucumberTests {
+public class HealthCheckTest extends AbstractTestNGCucumberTests {
 }

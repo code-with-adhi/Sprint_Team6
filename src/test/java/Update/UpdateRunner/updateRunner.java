@@ -6,7 +6,7 @@ package Update.UpdateRunner;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = "src/test/resources/UpdateFeature/updateFeature.feature", glue = "Update.UpdateStepDefinition", plugin = {
+@CucumberOptions(features = "src/test/resources/UpdateFeature/updateFeature.feature", glue = {"Update.UpdateStepDefinition","Hooks"}, plugin = {
         "pretty", "html:target/sprint-report.html" }, monochrome = true)
 public class updateRunner extends AbstractTestNGCucumberTests {
 }

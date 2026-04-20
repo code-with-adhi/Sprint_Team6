@@ -5,10 +5,6 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
-import java.io.IOException;
-
-import file_utility.FileUtility;
-
 public class GetBookingSteps {
 	Response response;
 	long respTime;

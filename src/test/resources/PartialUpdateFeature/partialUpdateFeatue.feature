@@ -12,7 +12,7 @@ Feature: Validate Partial Update of Booking using PATCH
     And Validate status line contains "OK"
     And Validate firstname
     And Validate lastname is "Jones"
-    # And Validate depositpaid is "false"
+  # And Validate depositpaid is "false"
 
   Scenario: TC_29 Validate only totalprice is updated
     When Send PATCH request with totalprice only
@@ -20,7 +20,7 @@ Feature: Validate Partial Update of Booking using PATCH
     And Validate response time less than 2000 ms
     And Validate status line contains "OK"
     And Validate lastname is "Jones"
-    # And Validate depositpaid is "false"
+  # And Validate depositpaid is "false"
 
   Scenario: TC_30 Validate PATCH depositpaid field update
     When Send PATCH request updating depositpaid
@@ -29,7 +29,7 @@ Feature: Validate Partial Update of Booking using PATCH
     And Validate status line contains "OK"
     And Validate firstname is "Susan"
     And Validate lastname is "Jones"
-    # And Validate depositpaid is "false"
+  # And Validate depositpaid is "false"
 
   Scenario: TC_31 Validate multiple fields update
     When Send PATCH request with multiple fields
@@ -38,7 +38,7 @@ Feature: Validate Partial Update of Booking using PATCH
     And Validate status line contains "OK"
     And Validate firstname is "Robert"
     And Validate lastname is "Jones"
-    # And Validate depositpaid is "true"
+  # And Validate depositpaid is "true"
 
   Scenario: TC_32 Validate invalid token error
     When Send PATCH request with invalid token

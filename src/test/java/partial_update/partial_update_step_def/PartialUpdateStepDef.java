@@ -117,7 +117,7 @@ public class PartialUpdateStepDef {
     public Response sendPatch(String body, String token) {
         return given()
                 .contentType(ContentType.JSON)
-                .cookie("token", Token.getToken())
+                .cookie("token", token)
                 .body(body)
                 .patch("/booking/" + bookingId);
     }

@@ -1,8 +1,13 @@
 package getBookingRunner;
 
-import io.cucumber.testng.AbstractTestNGCucumberTests;
-import io.cucumber.testng.CucumberOptions;
+//import io.cucumber.testng.AbstractTestNGCucumberTests;
+//import io.cucumber.testng.CucumberOptions;
 
+import org.junit.runner.RunWith;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+@RunWith(Cucumber.class)
 @CucumberOptions(
 	    features = "src/test/resources/GetBookingfeature/GetFeatureFile.feature",
 	    glue = "GetBookingByID",
@@ -10,6 +15,12 @@ import io.cucumber.testng.CucumberOptions;
 	    monochrome = true
 	)
 
+public class GetBookingRunner {
+
+}
+
+/*
 public class GetBookingRunner extends AbstractTestNGCucumberTests {
 
 }
+*/

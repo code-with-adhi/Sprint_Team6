@@ -6,8 +6,8 @@ import io.restassured.response.Response;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.*;
-import file_utility.Token;
+import static org.testng.Assert.*;
+//import file_utility.Token;
 
 public class PartialUpdateStepDef {
 
@@ -124,49 +124,52 @@ public class PartialUpdateStepDef {
 
     // ===== VALIDATIONS =====
 
+    // ===== VALIDATIONS =====
+
     @Then("Validate status code should be {int}")
     public void validate_status(int code) {
-        assertEquals(code, response.getStatusCode());
+        assertEquals(response.getStatusCode(), code, "Status code mismatch");
     }
 
     @Then("Validate response time less than {int} ms")
     public void validate_time(int time) {
-        assertTrue(response.getTime() < time);
+        assertTrue(response.getTime() < time, "Response time exceeded limit");
     }
 
     @Then("Validate status line contains {string}")
     public void validate_status_line(String text) {
-        assertTrue(response.getStatusLine().contains(text));
+        assertTrue(response.getStatusLine().contains(text), "Status line mismatch");
     }
 
     @Then("Validate firstname")
     public void validate_firstname() {
-        assertEquals(firstname, response.jsonPath().getString("firstname"));
+        assertEquals(response.jsonPath().getString("firstname"), firstname, "Firstname mismatch");
     }
 
     @Then("Validate firstname is {string}")
     public void validate_firstname_direct(String name) {
-        assertEquals(name, response.jsonPath().getString("firstname"));
+        assertEquals(response.jsonPath().getString("firstname"), name, "Firstname mismatch");
     }
 
     @Then("Validate lastname")
     public void validate_lastname() {
-        assertEquals(lastname, response.jsonPath().getString("lastname"));
+        assertEquals(response.jsonPath().getString("lastname"), lastname, "Lastname mismatch");
     }
 
     @Then("Validate lastname is {string}")
     public void validate_lastname_direct(String name) {
-        assertEquals(name, response.jsonPath().getString("lastname"));
+        assertEquals(response.jsonPath().getString("lastname"), name, "Lastname mismatch");
     }
 
     @Then("Validate depositpaid")
     public void validate_deposit() {
-        assertEquals(depositpaid, response.jsonPath().getBoolean("depositpaid"));
+        assertEquals(response.jsonPath().getBoolean("depositpaid"), depositpaid, "DepositPaid mismatch");
     }
 
     @Then("Validate PATCH depositpaid is {string}")
     public void validate_deposit_direct(String val) {
-        assertEquals(Boolean.parseBoolean(val),
-                response.jsonPath().getBoolean("depositpaid"));
+        assertEquals(response.jsonPath().getBoolean("depositpaid"),
+                Boolean.parseBoolean(val),
+                "DepositPaid mismatch");
     }
 }

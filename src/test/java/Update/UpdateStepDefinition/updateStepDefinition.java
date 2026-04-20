@@ -6,10 +6,10 @@ import io.restassured.response.Response;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.*;
+import static org.testng.Assert.*;
 
 import ExcelUtility.excelUtility;
-import file_utility.Token;
+//import file_utility.Token;
 
 public class updateStepDefinition {
 
@@ -31,11 +31,11 @@ public class updateStepDefinition {
     @Given("Generate valid authentication token")
     public void Generate_valid_authentication_token() {
         String body = "{\r\n" + //
-        "    \"username\" : \"admin\",\r\n" + //
-        "    \"password\" : \"password123\"\r\n" + //
-        "}";
+                "    \"username\" : \"admin\",\r\n" + //
+                "    \"password\" : \"password123\"\r\n" + //
+                "}";
         response = RestAssured.given().contentType(ContentType.JSON).body(body)
-        .when().post("/auth");
+                .when().post("/auth");
 
         token = response.jsonPath().getString("token");
         // Token.setToken(token);
@@ -64,13 +64,11 @@ public class updateStepDefinition {
         bookingId = response.jsonPath().getInt("bookingid");
     }
 
-    
-
     @When("Send PUT request with complete valid body")
     public void send_put_request_with_complete_valid_body() throws Exception {
 
-        firstname  = eUtil.getDataFromExcel("updatBookingData", 1, 1);
-        lastname   = eUtil.getDataFromExcel("updatBookingData", 1, 2);
+        firstname = eUtil.getDataFromExcel("updatBookingData", 1, 1);
+        lastname = eUtil.getDataFromExcel("updatBookingData", 1, 2);
         String totalprice = eUtil.getDataFromExcel("updatBookingData", 1, 3);
 
         depositpaid = true;
@@ -207,33 +205,31 @@ public class updateStepDefinition {
 
     @Then("Validate status code should be {int}")
     public void validate_status_code(int expectedStatusCode) {
-        assertEquals(expectedStatusCode, response.getStatusCode());
+        assertEquals(response.getStatusCode(), expectedStatusCode, "Status code mismatch");
     }
 
     @Then("Validate response time less than {int} ms")
     public void validate_response_time(int time) {
-        assertTrue(response.getTime() < time);
+        assertTrue(response.getTime() < time, "Response time exceeded limit");
     }
 
     @Then("Validate status line contains {string}")
     public void validate_status_line(String text) {
-        assertTrue(response.getStatusLine().contains(text));
+        assertTrue(response.getStatusLine().contains(text), "Status line mismatch");
     }
 
     @Then("Validate firstname")
     public void validate_firstname() {
-        assertEquals(firstname, response.jsonPath().getString("firstname"));
+        assertEquals(response.jsonPath().getString("firstname"), firstname, "Firstname mismatch");
     }
 
     @Then("Validate lastname")
     public void validate_lastname() {
-        assertEquals(lastname, response.jsonPath().getString("lastname"));
+        assertEquals(response.jsonPath().getString("lastname"), lastname, "Lastname mismatch");
     }
 
     @Then("Validate depositpaid")
     public void validate_depositpaid() {
-        assertEquals(depositpaid, response.jsonPath().getBoolean("depositpaid"));
+        assertEquals(response.jsonPath().getBoolean("depositpaid"), depositpaid, "DepositPaid mismatch");
     }
-
-    
 }

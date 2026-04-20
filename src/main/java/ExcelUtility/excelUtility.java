@@ -11,13 +11,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class excelUtility {
     public String getDataFromExcel(String sheetName, int rowNum, int cellNum) throws Exception {
-    	InputStream fis = getClass().getClassLoader()
+        InputStream fis = getClass().getClassLoader()
                 .getResourceAsStream("testdata/updateBookingData.xlsx");
-    	Workbook wb = WorkbookFactory.create(fis);
+        Workbook wb = WorkbookFactory.create(fis);
 
-    	Sheet sheet = wb.getSheetAt(0);
+        Sheet sheet = wb.getSheetAt(0);
 
-        // ✅ Safety checks (avoid NullPointerException)
         if (sheet.getRow(rowNum) == null) {
             throw new RuntimeException("Row not found: " + rowNum);
         }

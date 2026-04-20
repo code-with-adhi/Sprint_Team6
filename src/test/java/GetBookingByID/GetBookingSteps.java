@@ -14,7 +14,7 @@ public class GetBookingSteps {
 	long respTime;
 	
 	
-	
+	/*
 	@io.cucumber.java.Before
 	public void setBaseURL() throws IOException
 	{
@@ -25,7 +25,7 @@ public class GetBookingSteps {
 	
 	}
 	
-	/*
+	
 	@Given("The Base URI for The Restful Booker is set {string}")
     public void setBaseURL(String url)
    {

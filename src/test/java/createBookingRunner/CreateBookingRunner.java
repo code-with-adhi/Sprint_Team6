@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 	    features = "src/test/resources/CreateBookingFeature/CreateFeatureFile.feature",
-	    glue = "CreateBooking",
+	    glue = {"CreateBooking","Hooks"},
 	    plugin = {"pretty", "html:target/CreateBooking_POST_Report.html"},
 	    monochrome = true
 	)

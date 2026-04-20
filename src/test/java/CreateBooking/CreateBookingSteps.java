@@ -19,6 +19,8 @@ public class CreateBookingSteps {
 	long respTime;
 	Map<String, Object> body;
 	Map<String, String> bookingDates;
+   
+  /*
     ExcelUtility1 eUtil;
 	
 	@io.cucumber.java.Before
@@ -32,7 +34,7 @@ public class CreateBookingSteps {
 	
 	}
 	
-	/*
+	
 	@Given("The Base URL for The Restful Booker is set {string}")
 	public void setBaseURL(String url)
 	{
@@ -43,7 +45,7 @@ public class CreateBookingSteps {
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
-
+		 ExcelUtility1 eUtil = new ExcelUtility1("bookingData.xlsx");
 	    int row = eUtil.getRowByTcId("Sheet1", tcId);
 
 	    String firstname = eUtil.getDataFromExcel("Sheet1", row, 1);

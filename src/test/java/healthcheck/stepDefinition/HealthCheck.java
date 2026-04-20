@@ -9,7 +9,6 @@ public class HealthCheck {
 	    Response response;
 	    long responseTime;
 
-	    String baseurl;
 
 	   FileUtility fUtil = new FileUtility();
 
@@ -17,14 +16,12 @@ public class HealthCheck {
 
 	    @Given("the API is up")
 	    public void the_api_is_up() throws Exception {
-	        baseurl = fUtil.getDataFromPropertiesFile("baseurl");
-	        baseURI = baseurl;
+	       
 	    }
 
 	    @Given("the API is running")
 	    public void the_api_is_running() throws Exception {
-	        baseurl = fUtil.getDataFromPropertiesFile("baseurl");
-	        baseURI = baseurl;
+	       
 	    }
 
 	    @Given("I do not provide any authentication")

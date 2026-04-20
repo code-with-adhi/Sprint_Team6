@@ -1,5 +1,4 @@
 package delete.StepDefinition;
-
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -13,21 +12,16 @@ import file_utility.Token;
 public class deleteBooking {
 
     Response response;
-    static String BASE_URL;
+    
     String authToken;
     String bookingId; 
     FileUtility fLib = new FileUtility();
 
-    public void loadUrl() throws IOException {
-        if (BASE_URL == null) {
-            BASE_URL = fLib.getDataFromPropertiesFile("baseurl");
-        }
-        RestAssured.baseURI = BASE_URL;
-    }
+    
     
     @Given("I have a valid authentication token")
     public void i_have_a_valid_authentication_token() throws IOException {
-        loadUrl();
+       
 
         // Only generate if not already present
         if (Token.getToken() == null) {
@@ -46,7 +40,6 @@ public class deleteBooking {
     
     @Given("the API is up and booking exists")
     public void the_api_is_up_and_booking_exists() throws IOException {
-        loadUrl();
 
 
             response = given()
@@ -64,7 +57,6 @@ public class deleteBooking {
 
     @Given("a booking has already been deleted")
     public void a_booking_has_already_been_deleted() throws IOException {
-        loadUrl();
         // Setup for TC_35: Delete the booking first
         given()
             .header("Cookie", "token=" + Token.getToken() )
@@ -73,7 +65,6 @@ public class deleteBooking {
     }
     @When("I send a DELETE request for the booking")
     public void i_send_a_delete_request_for_the_booking() throws IOException {
-        loadUrl();
 
         String token = Token.getToken();
 
@@ -86,7 +77,6 @@ public class deleteBooking {
     }
     @When("I send a GET request for that deleted booking ID")
     public void i_send_a_get_request_for_that_deleted_booking_id() throws IOException {
-        loadUrl();
         response = when().get("/booking/" + bookingId);
     }
 

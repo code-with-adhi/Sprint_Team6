@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/deletefeaturefile/deleteBooking.feature",
-        glue = "delete.StepDefinition",
+        glue = { "delete.StepDefinition","Hooks"},
         plugin = {"pretty", "html:target/deleteBooking-cucumber-report.html"},
         monochrome = true
 )

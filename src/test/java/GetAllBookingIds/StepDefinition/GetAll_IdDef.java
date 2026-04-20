@@ -12,7 +12,7 @@ public class GetAll_IdDef {
     Response R;
     @Given("Base URI is set to retrieve data")
     public void getAll(){
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com/";
+        // RestAssured.baseURI = "https://restful-booker.herokuapp.com/";
     }
 
     @When("no parameters to filter")

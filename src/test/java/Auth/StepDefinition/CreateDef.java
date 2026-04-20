@@ -20,7 +20,7 @@ public class CreateDef {
 
     @Given("Base URI is set to create the token")
     public void setURI(){
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
+        // RestAssured.baseURI = "https://restful-booker.herokuapp.com";
     }
 
     @When("username and password are given properly")

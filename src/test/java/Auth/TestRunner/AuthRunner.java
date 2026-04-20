@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 // @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/AuthFeature/CreateToken.feature",
-        glue = "Auth.StepDefinition",
+        glue = {"Auth.StepDefinition","Hooks"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-report.html",

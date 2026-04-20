@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 // @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/GetAll_IdFeature/AllBookingIds.feature",
-        glue = "GetAllBookingIds.StepDefinition",
+        glue = {"GetAllBookingIds.StepDefinition", "Hooks"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-report.html",

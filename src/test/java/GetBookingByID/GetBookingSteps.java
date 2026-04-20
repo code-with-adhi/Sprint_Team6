@@ -5,16 +5,33 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
+import java.io.IOException;
+
+import file_utility.FileUtility;
+
 public class GetBookingSteps {
 	Response response;
 	long respTime;
 	
-	//Background
+	
+	
+	@io.cucumber.java.Before
+	public void setBaseURL() throws IOException
+	{
+		
+			FileUtility fLib = new FileUtility(); 
+		    baseURI = fLib.getDataFromPropertiesFile("baseurl");
+		    System.out.println(baseURI);
+	
+	}
+	
+	/*
 	@Given("The Base URI for The Restful Booker is set {string}")
     public void setBaseURL(String url)
    {
 	    baseURI = url;	
     }
+    */
 	
 	@When("the user send GET request with {string}")
 	public void sendGetRequest(String endpoint)

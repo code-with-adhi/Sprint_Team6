@@ -2,9 +2,7 @@
 
 Feature: Validate Complete Creation of Booking using POST
 
-Background:  
-    Given The Base URL for The Restful Booker is set "https://restful-booker.herokuapp.com"
-        
+
 
 @TC_15   
 Scenario Outline: Create new booking with valid data

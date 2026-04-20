@@ -6,10 +6,12 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import ExcelUtility.ExcelUtility1;
+import file_utility.FileUtility;
 import io.cucumber.java.en.*;
 
 public class CreateBookingSteps {
@@ -18,15 +20,25 @@ public class CreateBookingSteps {
 	long respTime;
 	Map<String, Object> body = new HashMap<>();
 	Map<String, String> bookingDates = new HashMap<>();
-	//Background
+
 	
+	@io.cucumber.java.Before
+	public void setBaseURL() throws IOException
+	{
+		
+			FileUtility fLib = new FileUtility(); 
+		    baseURI = fLib.getDataFromPropertiesFile("baseurl");
+		    System.out.println(baseURI);
+	
+	}
+	
+	/*
 	@Given("The Base URL for The Restful Booker is set {string}")
 	public void setBaseURL(String url)
 	{
 		baseURI=url;
 	}
-	
-	//When
+	*/
 	
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
@@ -60,7 +72,7 @@ public class CreateBookingSteps {
 	            .body(body)
 	            .when()
 	            .post(endpoint);
-	    response.then().log().all();
+	   // response.then().log().all();
 	    respTime=response.getTime();
 	}
 	

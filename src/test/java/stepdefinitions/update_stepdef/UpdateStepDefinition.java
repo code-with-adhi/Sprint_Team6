@@ -8,12 +8,12 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
-import ExcelUtility.excelUtility;
+import utils.excelUtility.ExcelUtilityUpdate;
 //import file_utility.Token;
 
 public class UpdateStepDefinition {
 
-    excelUtility eUtil = new excelUtility();
+    ExcelUtilityUpdate eUtil = new ExcelUtilityUpdate();
 
     String token;
     int bookingId;

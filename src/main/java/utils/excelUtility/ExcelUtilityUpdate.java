@@ -1,4 +1,4 @@
-package ExcelUtility;
+package utils.excelUtility;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-public class excelUtility {
+public class ExcelUtilityUpdate {
     public String getDataFromExcel(String sheetName, int rowNum, int cellNum) throws Exception {
         InputStream fis = getClass().getClassLoader()
                 .getResourceAsStream("testdata/updateBookingData.xlsx");

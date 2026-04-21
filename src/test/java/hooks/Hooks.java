@@ -4,7 +4,7 @@ import io.cucumber.java.Before;
 
 import java.io.IOException;
 
-import file_utility.FileUtility;
+import utils.fileUtility.FileUtility;
 import io.cucumber.java.After;
 import io.restassured.RestAssured;
 

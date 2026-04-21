@@ -2,7 +2,7 @@ package stepdefinitions.health_check_stepdef;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
-import file_utility.FileUtility;
+import utils.fileUtility.FileUtility;
 import io.restassured.response.Response;
 import io.cucumber.java.en.*;
 public class HealthCheck {

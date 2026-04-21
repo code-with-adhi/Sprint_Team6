@@ -3,12 +3,12 @@ import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import file_utility.FileUtility;
+import utils.fileUtility.FileUtility;
 import java.io.IOException;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import file_utility.Token;
+import utils.fileUtility.Token;
 public class deleteBooking {
 
     Response response;

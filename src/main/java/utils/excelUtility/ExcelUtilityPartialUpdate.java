@@ -1,13 +1,13 @@
-package ExcelUtility;
+package utils.excelUtility;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.*;
 
-public class excelUtilityPartialUpdate {
+public class ExcelUtilityPartialUpdate {
 
-    String path = System.getProperty("user.dir") + "/src/test/resources/testdata/PartialUpdation.xlsx";
+    String path = System.getProperty("user.dir") + "/src/test/resources/testdata/PartialUpdationData.xlsx";
 
     public String getDataFromExcel(String sheetName, int rowNum, int cellNum) {
 

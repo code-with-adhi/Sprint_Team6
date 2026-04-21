@@ -7,9 +7,9 @@ import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
-import ExcelUtility.excelUtilityPartialUpdate;
+import utils.excelUtility.ExcelUtilityPartialUpdate;
 
-import file_utility.Token;
+import utils.fileUtility.Token;
 
 public class PartialUpdateStepDef {
 
@@ -20,7 +20,7 @@ public class PartialUpdateStepDef {
     String firstname;
     String lastname;
     boolean depositpaid;
-    excelUtilityPartialUpdate eUtil = new excelUtilityPartialUpdate();
+    ExcelUtilityPartialUpdate eUtil = new ExcelUtilityPartialUpdate();
 
     @Given("Generate PATCH valid authentication token")
     public void Generate_valid_authentication_token() {

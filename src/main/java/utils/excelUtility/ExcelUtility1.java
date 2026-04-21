@@ -1,4 +1,4 @@
-package ExcelUtility;
+package excelUtility;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ public class ExcelUtility1 {
         Sheet sheet = wb.getSheet(sheetName);
 
         if (sheet == null || sheet.getRow(rowNum) == null ||
-            sheet.getRow(rowNum).getCell(cellNum) == null) {
+                sheet.getRow(rowNum).getCell(cellNum) == null) {
             throw new RuntimeException("Invalid cell reference");
         }
 

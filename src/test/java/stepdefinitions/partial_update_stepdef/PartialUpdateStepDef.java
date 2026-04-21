@@ -78,7 +78,7 @@ public class PartialUpdateStepDef {
 
         int row = 2;
 
-        String totalprice = eUtil.getDataFromExcel("PartialUpdation", row, 1);
+        String totalprice = eUtil.getDataFromExcel("PartialUpdation", row, 2);
 
         String body = "{ \"totalprice\": " + totalprice + " }";
 
@@ -103,10 +103,10 @@ public class PartialUpdateStepDef {
 
         int row = 4;
 
-        firstname = eUtil.getDataFromExcel("PartialUpdation", row, 0);
-        String totalprice = eUtil.getDataFromExcel("PartialUpdation", row, 1);
+        firstname = eUtil.getDataFromExcel("PartialUpdation", row, 1);
+        String totalprice = eUtil.getDataFromExcel("PartialUpdation", row, 2);
         depositpaid = Boolean.parseBoolean(
-                eUtil.getDataFromExcel("PartialUpdation", row, 2));
+                eUtil.getDataFromExcel("PartialUpdation", row, 3));
 
         String body = "{\n" +
                 "\"firstname\": \"" + firstname + "\",\n" +

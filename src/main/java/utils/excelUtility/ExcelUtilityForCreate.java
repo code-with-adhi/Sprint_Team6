@@ -1,15 +1,15 @@
-package ExcelUtility;
+package utils.excelUtility;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import org.apache.poi.ss.usermodel.*;
 
-public class ExcelUtility1 {
+public class ExcelUtilityForCreate {
 
     private Workbook wb;
 
-    public ExcelUtility1(String fileName) throws Exception {
+    public ExcelUtilityForCreate(String fileName) throws Exception {
         InputStream fis = getClass().getClassLoader()
                 .getResourceAsStream("testdata/" + fileName);
         wb = WorkbookFactory.create(fis);
@@ -20,7 +20,7 @@ public class ExcelUtility1 {
         Sheet sheet = wb.getSheet(sheetName);
 
         if (sheet == null || sheet.getRow(rowNum) == null ||
-            sheet.getRow(rowNum).getCell(cellNum) == null) {
+                sheet.getRow(rowNum).getCell(cellNum) == null) {
             throw new RuntimeException("Invalid cell reference");
         }
 

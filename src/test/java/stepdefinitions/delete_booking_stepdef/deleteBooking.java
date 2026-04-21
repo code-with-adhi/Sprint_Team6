@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import file_utility.Token;
-public class DeleteBooking {
+public class deleteBooking {
 
     Response response;
     

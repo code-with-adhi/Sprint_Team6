@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import utils.excelUtility.ExcelUtilityForCreate;
+import utils.fileUtility.*;
 import io.cucumber.java.en.*;
 
 public class CreateBookingStepDef {
@@ -21,7 +22,7 @@ public class CreateBookingStepDef {
 	@When("the user sends the POST request {string} with tcId {string}")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
-		ExcelUtilityForCreate eUtil = new ExcelUtilityForCreate("bookingData.xlsx");
+		ExcelUtilityForCreate eUtil = new ExcelUtilityForCreate("CreateBookingData.xlsx");
 		int row = eUtil.getRowByTcId("Sheet1", tcId);
 
 		String firstname = eUtil.getDataFromExcel("Sheet1", row, 1);

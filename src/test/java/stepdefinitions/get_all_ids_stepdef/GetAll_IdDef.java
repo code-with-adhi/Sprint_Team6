@@ -52,9 +52,9 @@ public class GetAll_IdDef {
         .when().get("/booking");        
     }
     
-    @Then("status code must be 200")
-    public void StatusCheck(){
-        R.then().log().all();
+    @Then("status code must be {int}")
+    public void StatusCheck(int i){
+        R.then().assertThat().statusCode(i).log().all();
     }
 
 

@@ -1,4 +1,4 @@
-package delete.StepDefinition;
+package stepdefinitions.delete_booking_stepdef;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import file_utility.Token;
-public class deleteBooking {
+public class DeleteBooking {
 
     Response response;
     

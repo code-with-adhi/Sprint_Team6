@@ -6,6 +6,7 @@ import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import dto.CreateBody;
 import utils.excelUtility.ExcelUtilityForCreate;
@@ -24,10 +25,13 @@ public class CreateBookingStepDef {
 	@When("the user sends the POST request {string} with following details")
     public void sendPostRequestFor_TC15(String endpoint,DataTable dataTable) {
 		
-		Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
-		CreateBody c=new CreateBody();
-		
-		c.setFirstname(data.get("firstname"));
+		List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
+
+    for (Map<String, String> data : dataList) {
+
+        CreateBody c = new CreateBody();
+
+        c.setFirstname(data.get("firstname"));
         c.setLastname(data.get("lastname"));
         c.setTotalprice(Integer.parseInt(data.get("totalprice")));
         c.setDepositpaid(Boolean.parseBoolean(data.get("depositpaid")));
@@ -35,10 +39,8 @@ public class CreateBookingStepDef {
         c.setCheckout(data.get("checkout"));
         c.setAdditionalneeds(data.get("additionalneeds"));
 
-		response=given().contentType(ContentType.JSON).body(c).when().post(endpoint);
-		respTime=response.getTime();
-
 	}
+}
 	
 	//Scenario Outline
     @When("the user sends the POST request {string} with {string},{string},{int},{boolean},{string},{string},{string}")

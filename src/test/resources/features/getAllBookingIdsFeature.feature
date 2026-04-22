@@ -6,6 +6,9 @@ Background:
 Scenario: TC5
   When no parameters to filter
   Then status code must be 200
+  And response is an array
+  And response has multiple json objects
+  And  
 
 Scenario: TC6
   When fliter with name

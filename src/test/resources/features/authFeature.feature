@@ -1,31 +1,39 @@
 Feature: Create Token test cases
-Background: 
-  Given Base URI is set to create the token
+# Background: 
+#   Given Base URI is set to create the token
   
 Scenario Outline: TC1
-  When the "<username>" and "<password>" are given properly
+  Given valid username and password
+  |username|admin|
+  |password|password123|
+  When POST request is sent to "/auth" endpoint
   Then status code must be 200
   And token must be generated
   And token must be string
   And token length must be 15
 
-  Examples:
-  |username|password|
-  |admin|password123|
 
 
 Scenario: TC2
-  When the password is wrong
-  |username|adshhdih|
-  |password|pass|
+  Given invalid username "<username>" or password "<password>" are given
+  When POST request is sent to "/auth" endpoint
   Then status code must be 200 
   And reason must be displayed
   And reason must be "Bad credentials"
 
+  Examples:
+  |username|password|
+  |admin|passburrrp|
+  |adshhdih|password123|
+  |adshhdih|passburrrp|
+
+
 Scenario: TC3
-  When the password field is Missing
+  Given the password field is Missing
+  When POST request is sent to "/auth" endpoint
   Then status code must be 400
 
 Scenario: TC4
-  When content type header is Missing
+  Given content type header is Missing
+  When POST request is sent to "/auth" endpoint
   Then status code must be 400

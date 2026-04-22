@@ -1,88 +1,105 @@
 package stepdefinitions.health_check_stepdef;
+
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
-import utils.fileUtility.FileUtility;
-import io.restassured.response.Response;
 import io.cucumber.java.en.*;
+import io.cucumber.datatable.DataTable;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+import java.util.List;
+import java.util.Map;
+
+import utils.fileUtility.FileUtility;
+
 public class HealthCheck {
-	    Response response;
-	    long responseTime;
 
+    Response response;
+    long responseTime;
 
-	   FileUtility fUtil = new FileUtility();
+    FileUtility fUtil = new FileUtility();
 
-	    
+    // =========================================
+    // SETUP (Base URL using FileUtility)
+    // =========================================
+    @Given("the API is up")
+    public void the_api_is_up() throws Exception {
+        RestAssured.baseURI = fUtil.getDataFromPropertiesFile("baseurl");
+    }
 
-	    @Given("the API is up")
-	    public void the_api_is_up() throws Exception {
-	       
-	    }
+    @Given("the API is running")
+    public void the_api_is_running() throws Exception {
+        RestAssured.baseURI = fUtil.getDataFromPropertiesFile("baseurl");
+    }
 
-	    @Given("the API is running")
-	    public void the_api_is_running() throws Exception {
-	       
-	    }
+    @Given("I do not provide any authentication")
+    public void i_do_not_provide_any_authentication() {
+        // No authentication required
+    }
 
-	    @Given("I do not provide any authentication")
-	    public void i_do_not_provide_any_authentication() {
-	        
-	    }
+    // =========================================
+    // SCENARIO OUTLINE + NORMAL SCENARIOS
+    // =========================================
+    @When("I send a GET request to {string}")
+    public void i_send_a_get_request_to(String endpoint) {
 
-	   
+        response = given()
+                .when()
+                .get(endpoint);
 
-	    @When("I send a GET request to {string}")
-	    public void i_send_a_get_request_to(String endpoint) {
-	        response = given()
-	                    .when()
-	                    .get(endpoint);
+        responseTime = response.getTime();
+    }
 
-	        responseTime = response.getTime();
-	    }
+    // =========================================
+    // DATA TABLE (TC_39)
+    // =========================================
+    @When("I send multiple GET requests with following data")
+    public void i_send_multiple_get_requests_with_following_data(DataTable dataTable) {
 
-	    @When("I send multiple GET requests to {string}")
-	    public void i_send_multiple_get_requests_to(String endpoint) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 
-	        for (int i = 0; i < 3; i++) {
-	            response = given()
-	                        .when()
-	                        .get(endpoint);
+        for (Map<String, String> row : data) {
 
-	            assertEquals(201, response.getStatusCode());
-	        }
-	    }
+            String endpoint = row.get("endpoint");
+            int expectedStatus = Integer.parseInt(row.get("expectedStatus"));
 
-	    
+            Response res = given()
+                    .when()
+                    .get(endpoint);
 
-	    @Then("the response status code should be {int}")
-	    public void the_response_status_code_should_be(Integer expectedStatusCode) {
-	        assertEquals(expectedStatusCode.intValue(), response.getStatusCode());
-	    }
+            assertEquals(res.getStatusCode(), expectedStatus);
+        }
+    }
 
-	    @Then("the response message should be {string}")
-	    public void the_response_message_should_be(String expectedMessage) {
-	        String actual = response.getStatusLine();
-	        assertTrue(actual.contains(expectedMessage));
-	    }
+    @Then("all responses should be successful")
+    public void all_responses_should_be_successful() {
+        // Validation already done inside loop
+    }
 
-	    @Then("the response should be successful")
-	    public void the_response_should_be_successful() {
-	        assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201);
-	    }
+    // =========================================
+    // VALIDATIONS
+    // =========================================
+    @Then("the response status code should be {int}")
+    public void the_response_status_code_should_be(Integer expectedStatusCode) {
+        assertEquals(response.getStatusCode(), expectedStatusCode.intValue());
+    }
 
-	    @Then("all responses should have status code {int}")
-	    public void all_responses_should_have_status_code(Integer expectedStatusCode) {
-	        assertEquals(expectedStatusCode.intValue(), response.getStatusCode());
-	    }
+    @Then("the response message should be {string}")
+    public void the_response_message_should_be(String expectedMessage) {
+        String actual = response.getStatusLine();
+        assertTrue(actual.contains(expectedMessage));
+    }
 
-	    @Then("the response should always be successful")
-	    public void the_response_should_always_be_successful() {
-	        assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201);
-	    }
+    @Then("the response should be successful")
+    public void the_response_should_be_successful() {
+        assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201);
+    }
 
-	    @Then("the response time should be less than {int} seconds")
-	    public void the_response_time_should_be_less_than_seconds(Integer seconds) {
-	        long timeInSeconds = responseTime / 1000;
-	        assertTrue(timeInSeconds < seconds);
-	    }
-	}
+    @Then("the response time should be less than {int} seconds")
+    public void the_response_time_should_be_less_than_seconds(Integer seconds) {
+
+        long expectedTime = seconds * 1000; // seconds → milliseconds
+        assertTrue(responseTime < expectedTime, "Response time exceeded limit");
+    }
+}

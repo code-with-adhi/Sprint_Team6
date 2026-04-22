@@ -6,16 +6,22 @@ Feature: Validate Partial Update of Booking using PATCH
     And Create a new booking
 
   Scenario: TC_28 Validate only firstname is updated
-    When Send PATCH request with firstname only
+    When Send PATCH request with firstname "<firstname>" only
     Then Validate status code should be 200
     And Validate response time less than 2000 ms
     And Validate status line contains "OK"
-    And Validate firstname
-    And Validate lastname is "Jones"
-  # And Validate depositpaid is "false"
+    And Validate firstname is "<firstname>"
+    And Validate lastname is "<expectedLastname>"
+    # And Validate depositpaid is "false"
+    Examples:
+      | firstname | expectedLastname |
+      | Alice     | Jones            |
+
 
   Scenario: TC_29 Validate only totalprice is updated
     When Send PATCH request with totalprice only
+      | totalprice |
+      | 2500       |
     Then Validate status code should be 200
     And Validate response time less than 2000 ms
     And Validate status line contains "OK"

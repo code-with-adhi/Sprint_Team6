@@ -2,13 +2,25 @@ Feature: Create Token test cases
 Background: 
   Given Base URI is set to create the token
   
-Scenario: TC1
-  When username and password are given properly
-  Then token must be generated
+Scenario Outline: TC1
+  When the "<username>" and "<password>" are given properly
+  Then status code must be 200
+  And token must be generated
+  And token must be string
+  And token length must be 15
+
+  Examples:
+  |username|password|
+  |admin|password123|
+
 
 Scenario: TC2
   When the password is wrong
-  Then status code must be 200 and reason must be displayed
+  |username|adshhdih|
+  |password|pass|
+  Then status code must be 200 
+  And reason must be displayed
+  And reason must be "Bad credentials"
 
 Scenario: TC3
   When the password field is Missing

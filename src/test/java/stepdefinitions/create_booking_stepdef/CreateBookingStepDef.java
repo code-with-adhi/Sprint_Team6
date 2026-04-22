@@ -18,8 +18,32 @@ public class CreateBookingStepDef {
 	long respTime;
 	Map<String, Object> body;
 	Map<String, String> bookingDates;
+	
+	
+	//Scenario Outline
+	@When("the user sends the POST request {string} with {string} {string} {string} {boolean} {string} {string} {string}")
+	public void sendPostRequest_tc15(String endpoint, String firstname, String lastname, String totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds)
+	{
+		String requestBody = "{\n" +
+	            "  \"firstname\": \"" + firstname + "\",\n" +
+	            "  \"lastname\": \"" + lastname + "\",\n" +
+	            "  \"totalprice\": " + totalprice + ",\n" +
+	            "  \"depositpaid\": " + depositpaid + ",\n" +
+	            "  \"bookingdates\": {\n" +
+	            "    \"checkin\": \"" + checkin + "\",\n" +
+	            "    \"checkout\": \"" + checkout + "\"\n" +
+	            "  },\n" +
+	            "  \"additionalneeds\": \"" + additionalneeds + "\"\n" +
+	            "}";
+		
+		response=given().contentType(ContentType.JSON)
+		.body(req).when().post(endpoint);
+		 respTime = response.getTime();
 
-	@When("the user sends the POST request {string} with tcId {string}")
+		
+	}
+
+	@When("the user sends the POST request {string} with tcId")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
 
 		ExcelUtilityForCreate eUtil = new ExcelUtilityForCreate("CreateBookingData.xlsx");

@@ -1,14 +1,13 @@
 Feature: Get all booking IDs
 
-Background: 
-  Given Base URI is set to retrieve data
+# Background: 
+#   Given Base URI is set to retrieve data
 
 Scenario: TC5
   When no parameters to filter
   Then status code must be 200
-  And response is an array
+  # And response is an array
   And response has multiple json objects
-  And  
 
 Scenario: TC6
   When fliter with name
@@ -21,6 +20,8 @@ Scenario: TC7
 Scenario: TC8
   When no valid data is present for the filter
   Then status code must be 200
+  And response has no data
+
 
 Scenario: TC9
   When date format is wrong

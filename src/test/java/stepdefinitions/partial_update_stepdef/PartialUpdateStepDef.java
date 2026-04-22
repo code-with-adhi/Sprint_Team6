@@ -10,6 +10,9 @@ import static org.testng.Assert.*;
 import utils.excelUtility.ExcelUtilityPartialUpdate;
 
 import utils.fileUtility.Token;
+import io.cucumber.datatable.DataTable;
+import java.util.List;
+import java.util.Map;
 
 public class PartialUpdateStepDef {
 
@@ -61,12 +64,8 @@ public class PartialUpdateStepDef {
 
     // ===== PATCH METHODS =====
 
-    @When("Send PATCH request with firstname only")
-    public void patch_firstname() {
-
-        int row = 1;
-
-        firstname = eUtil.getDataFromExcel("PartialUpdation", row, 0);
+    @When("Send PATCH request with firstname {string} only")
+    public void patch_firstname(String firstname) {
 
         String body = "{ \"firstname\": \"" + firstname + "\" }";
 
@@ -74,11 +73,12 @@ public class PartialUpdateStepDef {
     }
 
     @When("Send PATCH request with totalprice only")
-    public void patch_totalprice() {
+    public void patch_totalprice(DataTable dataTable) {
 
-        int row = 2;
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        Map<String, String> row = data.get(0);
 
-        String totalprice = eUtil.getDataFromExcel("PartialUpdation", row, 2);
+        String totalprice = row.get("totalprice");
 
         String body = "{ \"totalprice\": " + totalprice + " }";
 
@@ -156,24 +156,18 @@ public class PartialUpdateStepDef {
         assertTrue(response.getStatusLine().contains(text), "Status line mismatch");
     }
 
-    @Then("Validate firstname")
-    public void validate_firstname() {
-        assertEquals(response.jsonPath().getString("firstname"), firstname, "Firstname mismatch");
-    }
-
     @Then("Validate firstname is {string}")
-    public void validate_firstname_direct(String name) {
-        assertEquals(response.jsonPath().getString("firstname"), name, "Firstname mismatch");
-    }
-
-    @Then("Validate lastname")
-    public void validate_lastname() {
-        assertEquals(response.jsonPath().getString("lastname"), lastname, "Lastname mismatch");
+    public void validate_firstname_direct(String expectedFirstname) {
+        assertEquals(response.jsonPath().getString("firstname"),
+                expectedFirstname,
+                "Firstname mismatch");
     }
 
     @Then("Validate lastname is {string}")
-    public void validate_lastname_direct(String name) {
-        assertEquals(response.jsonPath().getString("lastname"), name, "Lastname mismatch");
+    public void validate_lastname_direct(String expectedLastname) {
+        assertEquals(response.jsonPath().getString("lastname"),
+                expectedLastname,
+                "Lastname mismatch");
     }
 
     @Then("Validate depositpaid")

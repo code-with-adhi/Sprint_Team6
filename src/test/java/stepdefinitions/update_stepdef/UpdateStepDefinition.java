@@ -8,6 +8,9 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 
+import java.util.Map;
+import io.cucumber.datatable.DataTable;
+import java.util.List;
 import utils.excelUtility.ExcelUtilityUpdate;
 //import file_utility.Token;
 
@@ -60,39 +63,8 @@ public class UpdateStepDefinition {
         bookingId = response.jsonPath().getInt("bookingid");
     }
 
-    @When("Send PUT request with complete valid body")
-    public void send_put_request_with_complete_valid_body() throws Exception {
-
-        int row = 1;
-
-        firstname = eUtil.getDataFromExcel("updatBookingData", row, 1);
-        lastname = eUtil.getDataFromExcel("updatBookingData", row, 2);
-        String totalprice = eUtil.getDataFromExcel("updatBookingData", row, 3);
-        depositpaid = Boolean.parseBoolean(eUtil.getDataFromExcel("updatBookingData", row, 4));
-
-        String body = "{\n" +
-                "  \"firstname\": \"" + firstname + "\",\n" +
-                "  \"lastname\": \"" + lastname + "\",\n" +
-                "  \"totalprice\": " + totalprice + ",\n" +
-                "  \"depositpaid\": " + depositpaid + ",\n" +
-                "  \"bookingdates\": {\n" +
-                "    \"checkin\": \"2026-05-01\",\n" +
-                "    \"checkout\": \"2026-05-10\"\n" +
-                "  },\n" +
-                "  \"additionalneeds\": \"Breakfast\"\n" +
-                "}";
-
-        response = sendPutRequest(body, bookingId);
-    }
-
-    @When("Send PUT request without lastname field")
-    public void put_without_lastname() throws Exception {
-
-        int row = 2;
-
-        firstname = eUtil.getDataFromExcel("updatBookingData", row, 1);
-        depositpaid = Boolean.parseBoolean(eUtil.getDataFromExcel("updatBookingData", row, 4));
-        String totalprice = eUtil.getDataFromExcel("updatBookingData", row, 3);
+    @When("Send PUT request without lastname field using {string} {string} {string}")
+    public void put_without_lastname(String firstname, String totalprice, String depositpaid) {
 
         String body = "{\n" +
                 "  \"firstname\": \"" + firstname + "\",\n" +
@@ -102,6 +74,35 @@ public class UpdateStepDefinition {
                 "    \"checkin\": \"2026-06-01\",\n" +
                 "    \"checkout\": \"2026-06-15\"\n" +
                 "  }\n" +
+                "}";
+
+        response = sendPutRequest(body, bookingId);
+    }
+
+    @When("Send PUT request with complete valid body")
+    public void send_put_request_with_complete_valid_body(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        Map<String, String> row = data.get(0);
+
+        firstname = row.get("firstname");
+        lastname = row.get("lastname");
+        String totalprice = row.get("totalprice");
+        depositpaid = Boolean.parseBoolean(row.get("depositpaid"));
+        String checkin = row.get("checkin");
+        String checkout = row.get("checkout");
+        String additionalneeds = row.get("additionalneeds");
+
+        String body = "{\n" +
+                "  \"firstname\": \"" + firstname + "\",\n" +
+                "  \"lastname\": \"" + lastname + "\",\n" +
+                "  \"totalprice\": " + totalprice + ",\n" +
+                "  \"depositpaid\": " + depositpaid + ",\n" +
+                "  \"bookingdates\": {\n" +
+                "    \"checkin\": \"" + checkin + "\",\n" +
+                "    \"checkout\": \"" + checkout + "\"\n" +
+                "  },\n" +
+                "  \"additionalneeds\": \"" + additionalneeds + "\"\n" +
                 "}";
 
         response = sendPutRequest(body, bookingId);

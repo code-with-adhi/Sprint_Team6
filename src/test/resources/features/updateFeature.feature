@@ -6,13 +6,19 @@ Feature: Validate Complete Updation of Booking using PUT
     And Create a new booking
 
   Scenario: TC_22 Validate update without mandatory field lastname
-    When Send PUT request without lastname field
+    When Send PUT request without lastname field using "<firstname>" "<totalprice>" "<depositpaid>"
     Then Validate status code should be 400
     And Validate response time less than 4000 ms
     And Validate status line contains "Bad Request"
+    Examples:
+      | firstname | totalprice | depositpaid |
+      | John      | 1000       | true        |
+
 
   Scenario: TC_23 Validate complete update with valid data
     When Send PUT request with complete valid body
+      | firstname | lastname | totalprice | depositpaid | checkin    | checkout   | additionalneeds |
+      | Alice     | Brown    | 1500       | false       | 2026-05-01 | 2026-05-10 | Breakfast       |
     Then Validate status code should be 200
     And Validate response time less than 4000 ms
     And Validate status line contains "OK"

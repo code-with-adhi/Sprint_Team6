@@ -1,8 +1,6 @@
 package utils.excelUtility;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
-
 import org.apache.poi.ss.usermodel.*;
 
 public class ExcelUtilityForCreate {
@@ -10,46 +8,59 @@ public class ExcelUtilityForCreate {
     private Workbook wb;
 
     public ExcelUtilityForCreate(String fileName) throws Exception {
+
         InputStream fis = getClass().getClassLoader()
                 .getResourceAsStream("testdata/" + fileName);
+
+        if (fis == null) {
+            throw new RuntimeException("File not found in testdata folder: " + fileName);
+        }
+
         wb = WorkbookFactory.create(fis);
     }
 
     public String getDataFromExcel(String sheetName, int rowNum, int cellNum) {
 
         Sheet sheet = wb.getSheet(sheetName);
-
-        if (sheet == null || sheet.getRow(rowNum) == null ||
-                sheet.getRow(rowNum).getCell(cellNum) == null) {
-            throw new RuntimeException("Invalid cell reference");
-        }
-
-        Cell cell = sheet.getRow(rowNum).getCell(cellNum);
+        Row row = sheet.getRow(rowNum);
+        Cell cell = row.getCell(cellNum);
 
         switch (cell.getCellType()) {
+
             case STRING:
-                return cell.getStringCellValue();
+                return cell.getStringCellValue().trim();
+
             case NUMERIC:
                 return String.valueOf((int) cell.getNumericCellValue());
+
             case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
+
             default:
                 return "";
         }
     }
 
-    public int getRowByTcId(String sheetName, String tcId) {
+    public int getRowByScenario(String sheetName, String scenario) {
+
         Sheet sheet = wb.getSheet(sheetName);
 
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-            String currentTcId = getDataFromExcel(sheetName, i, 0);
 
-            if (currentTcId.equalsIgnoreCase(tcId)) {
+            String scenarioName = getDataFromExcel(sheetName, i, 0);
+
+            if (scenarioName.equalsIgnoreCase(scenario)) {
                 return i;
             }
         }
 
-        throw new RuntimeException("TC_ID not found: " + tcId);
+        throw new RuntimeException("Scenario not found: " + scenario);
+    }
+
+    public int getRowCount(String sheetName) {
+
+        Sheet sheet = wb.getSheet(sheetName);
+        return sheet.getLastRowNum();
     }
 
     public void closeWorkbook() throws Exception {

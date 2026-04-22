@@ -169,10 +169,6 @@ public class CreateBookingStepDef {
 		assertEquals(bookingDates.get("checkout"), response.jsonPath().getString("booking.bookingdates.checkout"));
 	}
 
-    @When("the user sends the POST request {string} with following details")
-    public void sendPostRequest_TC15(String s) {
-        
-    }
 
     @When("the user sends the POST request {string} with Empty mandatory fields")
     public void sendPostRequestFor_TC20(String s) {

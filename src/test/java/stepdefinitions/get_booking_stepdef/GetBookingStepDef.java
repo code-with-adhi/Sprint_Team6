@@ -1,9 +1,14 @@
 package stepdefinitions.get_booking_stepdef;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
+
+import java.util.Map;
+
+import java.util.*;
 
 public class GetBookingStepDef {
 	Response response;
@@ -34,14 +39,21 @@ public class GetBookingStepDef {
 	}
 
 	@When("the user send GET request with {string} with invalid Id")
-	public void sendGetRequestForInvalidId(String endpoint) {
+	public void sendGetRequestForInvalidId(String endpoint,DataTable datatable) {
+		 List<Map<String, String>> dataList = datatable.asMaps(String.class, String.class);
+
+    for (Map<String, String> data : dataList) {
+
+        String id = data.get("id");
+
 		response = given()
 				.when()
-				.get(endpoint);
+				.get(endpoint+"/"+id);
 		// response.then().log().all();
 		respTime = response.getTime();
 
 	}
+}
 
 	@Then("the response statuscode for get is {int}")
 	public void validateResponseCode(int expcode) {

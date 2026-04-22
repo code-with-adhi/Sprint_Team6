@@ -7,9 +7,10 @@ import static org.testng.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import dto.CreateBody;
 import utils.excelUtility.ExcelUtilityForCreate;
 import utils.fileUtility.*;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 
 public class CreateBookingStepDef {
@@ -18,30 +19,64 @@ public class CreateBookingStepDef {
 	long respTime;
 	Map<String, Object> body;
 	Map<String, String> bookingDates;
-	
+
+	//Data Table
+	@When("the user sends the POST request {string} with following details")
+    public void sendPostRequestFor_TC15(String endpoint,DataTable dataTable) {
+		
+		Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
+		CreateBody c=new CreateBody();
+		
+		c.setFirstname(data.get("firstname"));
+        c.setLastname(data.get("lastname"));
+        c.setTotalprice(Integer.parseInt(data.get("totalprice")));
+        c.setDepositpaid(Boolean.parseBoolean(data.get("depositpaid")));
+        c.setCheckin(data.get("checkin"));
+        c.setCheckout(data.get("checkout"));
+        c.setAdditionalneeds(data.get("additionalneeds"));
+
+		response=given().contentType(ContentType.JSON).body(c).when().post(endpoint);
+		respTime=response.getTime();
+
+	}
 	
 	//Scenario Outline
-	@When("the user sends the POST request {string} with {string} {string} {string} {boolean} {string} {string} {string}")
-	public void sendPostRequest_tc15(String endpoint, String firstname, String lastname, String totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds)
-	{
-		String requestBody = "{\n" +
-	            "  \"firstname\": \"" + firstname + "\",\n" +
-	            "  \"lastname\": \"" + lastname + "\",\n" +
-	            "  \"totalprice\": " + totalprice + ",\n" +
-	            "  \"depositpaid\": " + depositpaid + ",\n" +
-	            "  \"bookingdates\": {\n" +
-	            "    \"checkin\": \"" + checkin + "\",\n" +
-	            "    \"checkout\": \"" + checkout + "\"\n" +
-	            "  },\n" +
-	            "  \"additionalneeds\": \"" + additionalneeds + "\"\n" +
-	            "}";
+    @When("the user sends the POST request {string} with {string},{string},{int},{boolean},{string},{string},{string}")
+    public void sendPostRequestFor_TC16_TC19(String endpoint, String firstname, String lastname, int totalprice, boolean depositpaid, String checkin, String checkout, String additionalneeds) {
+        CreateBody d=new CreateBody();
+		
+		d.setFirstname(firstname);
+		d.setLastname(lastname);
+		d.setTotalprice(totalprice);
+		d.setDepositpaid(depositpaid);
+		d.setCheckin(checkin);
+		d.setCheckout(checkout);
+		d.setAdditionalneeds(additionalneeds);
+
+		response=given().contentType(ContentType.JSON).body(d).when().post(endpoint);
+		respTime=response.getTime();
+
+    }
+
+	//Scenario Outline
+    @When("the user sends the POST request {string} with TotalPrice as String {string},{string},{string},{boolean},{string},{string},{string}")
+    public void sendPostRequestFor_TC18(String endpoint, String firstname, String lastname, int totalprice, boolean depositpaid,String checkin, String checkout, String additionalneeds) {
+        
+       CreateBody f=new CreateBody();
+		
+		f.setFirstname(firstname);
+		f.setLastname(lastname);
+		f.setTotalprice(totalprice);
+		f.setDepositpaid(depositpaid);
+		f.setCheckin(checkin);
+		f.setCheckout(checkout);
+		f.setAdditionalneeds(additionalneeds);
 		
 		response=given().contentType(ContentType.JSON)
-		.body(req).when().post(endpoint);
+		.body(f).when().post(endpoint);
 		 respTime = response.getTime();
 
-		
-	}
+    }
 
 	@When("the user sends the POST request {string} with tcId")
 	public void sendPostRequest(String endpoint, String tcId) throws Exception {
@@ -78,6 +113,21 @@ public class CreateBookingStepDef {
 		// response.then().log().all();
 		respTime = response.getTime();
 	}
+
+	@When("the user sends the POST request {string} with missing fields {string},{string},{int},{string},{string},{string}")
+    public void sendPostRequestFor_TC21(String endpoint, String firstname, String lastname, int totalprice, String checkin, String checkout, String additionalneeds) {
+        CreateBody g=new CreateBody();
+		
+		g.setFirstname(firstname);
+		g.setLastname(lastname);
+		g.setTotalprice(totalprice);
+		g.setCheckin(checkin);
+		g.setCheckout(checkout);
+		g.setAdditionalneeds(additionalneeds);
+
+		response=given().contentType(ContentType.JSON).body(g).when().post(endpoint);
+		respTime=response.getTime();
+    }
 
 	@Then("the response statuscode for post is {int}")
 	public void validateStatusCode(int expcode) {
@@ -118,5 +168,19 @@ public class CreateBookingStepDef {
 		assertEquals(bookingDates.get("checkin"), response.jsonPath().getString("booking.bookingdates.checkin"));
 		assertEquals(bookingDates.get("checkout"), response.jsonPath().getString("booking.bookingdates.checkout"));
 	}
+
+    @When("the user sends the POST request {string} with following details")
+    public void sendPostRequest_TC15(String s) {
+        
+    }
+
+    @When("the user sends the POST request {string} with Empty mandatory fields")
+    public void sendPostRequestFor_TC20(String s) {
+        
+    }
+
+    
+
+    
 
 }

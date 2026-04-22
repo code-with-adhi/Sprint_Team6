@@ -1,8 +1,14 @@
 package stepdefinitions.get_all_ids_stepdef;
 
-import java.util.HashMap;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
-import io.cucumber.java.en.Given;
+import java.util.HashMap;
+import java.util.List;
+
+import org.testng.Assert;
+
+// import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
@@ -10,10 +16,6 @@ import io.restassured.response.Response;
 
 public class GetAll_IdDef {
     Response R;
-    @Given("Base URI is set to retrieve data")
-    public void getAll(){
-        // RestAssured.baseURI = "https://restful-booker.herokuapp.com/";
-    }
 
     @When("no parameters to filter")
     public void no_parameters_to_filter() {
@@ -21,7 +23,6 @@ public class GetAll_IdDef {
         .when().get("/booking");
     }
 
-    
     @When("fliter with name")
     public void fliter_with_name() {
         HashMap<String, String> hp = new HashMap<>();
@@ -58,4 +59,13 @@ public class GetAll_IdDef {
     }
 
 
+    @Then("response has multiple json objects")
+    public void response_has_multiple_json_objects() {
+        R.then().body("size()", greaterThan(0));
+    }
+
+    @Then("response has no data")
+    public void response_has_no_data() {
+        R.then().body("size()", lessThan(1));
+    }
 }

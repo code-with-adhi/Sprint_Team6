@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 	glue = {
 		"stepdefinitions.create_booking_stepdef",
 		"hooks" },
-	plugin = { "pretty", "html:target/CreateBooking_POST_Report.html" },
+	plugin = { "pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" },
 	monochrome = true)
 public class CreateBookingTest extends AbstractTestNGCucumberTests {
 

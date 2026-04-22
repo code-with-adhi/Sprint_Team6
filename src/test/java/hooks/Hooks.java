@@ -13,9 +13,6 @@ public class Hooks {
     @Before
     public void beforeScenario() throws IOException {
         System.out.println("=== Test Started ===");
-
-        // Set Base URI globally
-        // RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         FileUtility fLib = new FileUtility();
         RestAssured.baseURI = fLib.getDataFromPropertiesFile("baseurl");
     }

@@ -4,7 +4,6 @@ import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.http.ContentType;
-
 import static io.restassured.RestAssured.*;
 import static org.testng.Assert.*;
 

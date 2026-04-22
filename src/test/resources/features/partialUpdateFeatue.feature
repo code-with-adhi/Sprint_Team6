@@ -17,7 +17,6 @@ Feature: Validate Partial Update of Booking using PATCH
       | firstname | expectedLastname |
       | Alice     | Jones            |
 
-
   Scenario: TC_29 Validate only totalprice is updated
     When Send PATCH request with totalprice only
       | totalprice |

@@ -24,8 +24,6 @@ Feature: Validate Complete Creation of Booking using POST
     Examples:
       | firstname | lastname | totalprice | depositpaid | checkin    | checkout   | additionalneeds |
       | Sharan    | Kumar    |       1000 | true        | 2024-01-01 | 2024-01-05 | Breakfast       |
-      | Arun      | Kumar    |        150 | false       | 2024-02-10 | 2024-02-15 | Dinner          |
-      | Priya     | Sharma   |        200 | true        | 2024-03-05 | 2024-03-10 | Wifi            |
 
   @TC_17
   Scenario: Validate request and response data

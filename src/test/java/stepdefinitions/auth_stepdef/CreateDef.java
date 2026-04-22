@@ -95,7 +95,6 @@ public class CreateDef {
         Assert.assertEquals(res, "Bad credentials");   
     }
 
-
     @Then("status code must be {int}")
     public void status_code_must_be(int i) {
         response.then().assertThat().statusCode(i).log().all();

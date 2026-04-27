@@ -24,7 +24,7 @@ public class GetBookingStepDef {
 				.contentType("application/json")
 				.body(body)
 				.when()
-				.post("/booking");
+				.post(endpoint);
 
 		id = res.jsonPath().getInt("bookingid");
 

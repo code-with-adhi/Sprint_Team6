@@ -29,7 +29,6 @@ public class GetAll_IdDef {
                 .queryParam("firstname", dates.get("Firstname" ))
                 .queryParam("lastname", dates.get("Lastname" ))
                 .when()
-                .log().all()
                 .get("/booking");
     }
     
@@ -37,18 +36,15 @@ public class GetAll_IdDef {
     public void dateFilter(String CIdate,String COdate) {
        
         checkinresp = RestAssured.given().queryParam("checkin",CIdate)
-        // .log().all()
         .when().get("/booking");
 
 
         checkoutresp = RestAssured.given().queryParam("checkout",COdate)
-        // .log().all()
         .when().get("/booking");     
 
         R = RestAssured.given()
         .queryParam("checkin",CIdate)
         .queryParam("checkout",COdate)
-        //    .log().all()
         .when()
         .get("/booking");
         

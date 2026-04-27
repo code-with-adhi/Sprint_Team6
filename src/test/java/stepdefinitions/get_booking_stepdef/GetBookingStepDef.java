@@ -24,7 +24,7 @@ public class GetBookingStepDef {
 				.contentType("application/json")
 				.body(body)
 				.when()
-				.post("/booking");
+				.post(endpoint);
 
 		id = res.jsonPath().getInt("bookingid");
 
@@ -72,7 +72,7 @@ public class GetBookingStepDef {
 
 	@Then("the get response should contain Booking Object")
 	public void validBookingObjectPresent() {
-		assertNotNull("booking");
+		assertNotNull(response.getBody());
 	}
 
 	@Then("the get response should contain following mandatory fields firstname, lastname, totalprice, depositpaid, checkin, checkout")

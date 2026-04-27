@@ -24,36 +24,36 @@ public class GetBookingStepDef {
 				.contentType("application/json")
 				.body(body)
 				.when()
-				.post(endpoint);
+				.post("/booking");
 
 		id = res.jsonPath().getInt("bookingid");
 
 		System.out.println("Generated ID in Hook: " + id);
 
-		response = given()
+		response = given().pathParam("id", id)
 				.when()
-				.get(endpoint + "/" + id);
+				.get(endpoint);
 		// response.then().log().all();
 		respTime = response.getTime();
 
 	}
 
 	@When("the user send GET request with {string} with invalid Id")
-	public void sendGetRequestForInvalidId(String endpoint,DataTable datatable) {
-		 List<Map<String, String>> dataList = datatable.asMaps(String.class, String.class);
+	public void sendGetRequestForInvalidId(String endpoint, DataTable datatable) {
+		List<Map<String, String>> dataList = datatable.asMaps(String.class, String.class);
 
-    for (Map<String, String> data : dataList) {
+		for (Map<String, String> data : dataList) {
 
-        String id = data.get("id");
+			String id = data.get("id");
 
-		response = given()
-				.when()
-				.get(endpoint+"/"+id);
-		// response.then().log().all();
-		respTime = response.getTime();
+			response = given()
+					.when()
+					.get(endpoint + "/" + id);
+			// response.then().log().all();
+			respTime = response.getTime();
 
+		}
 	}
-}
 
 	@Then("the response statuscode for get is {int}")
 	public void validateResponseCode(int expcode) {

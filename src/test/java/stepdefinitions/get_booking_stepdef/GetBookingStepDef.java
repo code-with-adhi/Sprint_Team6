@@ -72,7 +72,7 @@ public class GetBookingStepDef {
 
 	@Then("the get response should contain Booking Object")
 	public void validBookingObjectPresent() {
-		assertNotNull("booking");
+		assertNotNull(response.getBody());
 	}
 
 	@Then("the get response should contain following mandatory fields firstname, lastname, totalprice, depositpaid, checkin, checkout")

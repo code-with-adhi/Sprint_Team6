@@ -13,7 +13,6 @@ Scenario: TC6
   Then status code must be 200
   And response should have multiple json objects
 
-
 Scenario Outline: TC7
   When filtering with checkin "<CIdate>" date and checkout "<COdate>" date
 
@@ -29,7 +28,6 @@ Examples:
   |2014-12-14|2026-04-23|
   |2014-12-15|2026-04-24|
 
-
 Scenario Outline: TC8
   When no valid data is present for "<Rownumber>" row in excel
   Then status code must be 200
@@ -43,7 +41,7 @@ Scenario Outline: TC8
 
 Scenario: TC9
   When date from "<row>" in excel format is wrong
-  Then status code must be 500
+  Then status code must be 400
 
   Examples:
   | row       |

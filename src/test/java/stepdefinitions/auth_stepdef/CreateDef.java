@@ -40,15 +40,15 @@ public class CreateDef {
     }
 
     @Given("the password field is Missing")
-    public void the_password_field_is_Missing() {
+    public void woPassword() {
         body.setUsername("admin");
     }
 
     @Given("content type header is Missing")
-    public void content_type_header_is_Missing() throws Throwable {
+    public void woContentType() throws Throwable {
         // AuthObj body = new AuthObj();
-        String username = ExcelUtilityForAuth.getDataFromExcel("Auth_data", 1, 0);
-        String password = ExcelUtilityForAuth.getDataFromExcel("Auth_data", 1, 1);
+        String username = ExcelUtilityForAuth.getDataFromExcel("Auth_data", 2, 0);
+        String password = ExcelUtilityForAuth.getDataFromExcel("Auth_data", 2, 1);
         body.setPassword(password);
         body.setUsername(username);
         content_type_flag = false;
@@ -70,13 +70,13 @@ public class CreateDef {
     }
 
     @Then("token must be generated")
-    public void token_must_be_generated() {
+    public void tokenVal() {
         response.then().body("$",hasKey("token")).log().all();
         token = response.jsonPath().getString("token");
     }
 
     @Then("reason must be displayed")
-    public void reason_must_be_displayed(){
+    public void reasonCheck(){
         response.then().body("$",hasKey("reason")).log().all();
         String resaon = response.jsonPath().getString("reason");
         Assert.assertNotNull(resaon);
@@ -85,25 +85,25 @@ public class CreateDef {
 
 
     @Then("reason must be {string}")
-    public void reason_must_be(String s){
+    public void reasonVal(String s){
         String res = response.jsonPath().getString("reason");
         Assert.assertEquals(res, "Bad credentials");   
     }
 
     @Then("status code must be {int}")
-    public void status_code_must_be(int i) {
+    public void statusCheck(int i) {
         response.then().assertThat().statusCode(i).log().all();
     }
 
     @Then("token length must be {int}")
-    public void token_length_must_be(int i) {
+    public void tokenLength(int i) {
         String token = response.jsonPath().getString("token");
         Assert.assertEquals(token.length(), 15);
 
     }
 
     @Then("token must be string")
-    public void token_must_be_string() {
+    public void tokenDTcheck() {
         Object token = response.jsonPath().getString("token");
         Assert.assertEquals(token.getClass().getSimpleName(), "String");
     }    

@@ -18,9 +18,7 @@ public class deleteBooking {
     Response response;
     String bookingId;
 
-    // =========================================
-    // PRECONDITION → CREATE BOOKING (DYNAMIC)
-    // =========================================
+ 
     @Given("the API is up and booking exists")
     public void the_api_is_up_and_booking_exists() {
 
@@ -38,9 +36,6 @@ public class deleteBooking {
         bookingId = response.jsonPath().getString("bookingid");
     }
 
-    // =========================================
-    // AUTH TOKEN
-    // =========================================
     @Given("I have a valid authentication token")
     public void i_have_a_valid_authentication_token() {
 
@@ -61,9 +56,7 @@ public class deleteBooking {
         Token.setToken(null);
     }
 
-    // =========================================
-    // DELETE REQUEST
-    // =========================================
+
     @When("I send a DELETE request for the booking")
     public void i_send_a_delete_request_for_the_booking() {
 
@@ -76,9 +69,7 @@ public class deleteBooking {
         response = request.when().delete("/booking/" + bookingId);
     }
 
-    // =========================================
-    // DELETE AGAIN (TC_36)
-    // =========================================
+   
     @When("I send a DELETE request for the same booking again")
     public void i_send_delete_again() {
 
@@ -88,9 +79,6 @@ public class deleteBooking {
                 .delete("/booking/" + bookingId);
     }
 
-    // =========================================
-    // DATA TABLE (TC_34)
-    // =========================================
     @When("I perform delete operation with following data")
     public void i_perform_delete_operation_with_following_data(DataTable dataTable) {
 
@@ -126,9 +114,6 @@ public class deleteBooking {
         // already validated
     }
 
-    // =========================================
-    // DELETE + VERIFY (TC_35)
-    // =========================================
     @Given("I delete the booking")
     public void i_delete_the_booking() {
 
@@ -144,9 +129,6 @@ public class deleteBooking {
         response = when().get("/booking/" + bookingId);
     }
 
-    // =========================================
-    // VALIDATIONS
-    // =========================================
     @Then("the response status code should be {int}")
     public void the_response_status_code_should_be(Integer expectedCode) {
         assertEquals(response.getStatusCode(), expectedCode.intValue());

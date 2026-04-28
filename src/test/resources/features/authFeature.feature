@@ -2,7 +2,7 @@ Feature: Create Token test cases
 # Background: 
 #   Given Base URI is set to create the token
   
-Scenario Outline: TC1
+Scenario: TC1
   Given valid username and password
   |username|admin|
   |password|password123|
@@ -12,9 +12,7 @@ Scenario Outline: TC1
   And token must be string
   And token length must be 15
 
-
-
-Scenario: TC2
+Scenario Outline: TC2
   Given invalid username "<username>" or password "<password>" are given
   When POST request is sent to "/auth" endpoint
   Then status code must be 200 
@@ -26,7 +24,6 @@ Scenario: TC2
   |admin|passburrrp|
   |adshhdih|password123|
   |adshhdih|passburrrp|
-
 
 Scenario: TC3
   Given the password field is Missing

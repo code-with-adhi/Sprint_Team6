@@ -27,9 +27,9 @@ public class PartialUpdateStepDef {
 
     @Given("Generate PATCH valid authentication token")
     public void Generate_valid_authentication_token() {
-        String body = "{\r\n" + //
-                "    \"username\" : \"admin\",\r\n" + //
-                "    \"password\" : \"password123\"\r\n" + //
+        String body = "{\r\n" + 
+                "    \"username\" : \"admin\",\r\n" + 
+                "    \"password\" : \"password123\"\r\n" + 
                 "}";
         response = RestAssured.given().contentType(ContentType.JSON).body(body)
                 .when().post("/auth");
@@ -37,7 +37,6 @@ public class PartialUpdateStepDef {
         token = response.jsonPath().getString("token");
 
         Token.setToken(token);
-        // Token.setToken(token);
     }
 
     @Given("Create a new booking")
@@ -61,8 +60,6 @@ public class PartialUpdateStepDef {
 
         bookingId = response.jsonPath().getInt("bookingid");
     }
-
-    // ===== PATCH METHODS =====
 
     @When("Send PATCH request with firstname {string} only")
     public void patch_firstname(String firstname) {
@@ -137,10 +134,7 @@ public class PartialUpdateStepDef {
                 .patch("/booking/" + bookingId);
     }
 
-    // ===== VALIDATIONS =====
-
-    // ===== VALIDATIONS =====
-
+  
     @Then("Validate status code should be {int}")
     public void validate_status(int code) {
         assertEquals(response.getStatusCode(), code, "Status code mismatch");

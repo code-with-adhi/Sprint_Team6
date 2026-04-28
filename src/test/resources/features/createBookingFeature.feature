@@ -1,4 +1,3 @@
-#Author: Rajmohan T
 Feature: Validate Complete Creation of Booking using POST
 
   @TC_15

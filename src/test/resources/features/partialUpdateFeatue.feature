@@ -5,7 +5,7 @@ Feature: Validate Partial Update of Booking using PATCH
     Given Generate PATCH valid authentication token
     And Create a new booking
   @TC_28
-  Scenario: TC_28 Validate only firstname is updated
+  Scenario Outline: TC_28 Validate only firstname is updated
     When Send PATCH request with firstname "<firstname>" only
     Then Validate status code should be 200
     And Validate response time less than 2000 ms

@@ -15,25 +15,22 @@ public class ExcelUtilityPartialUpdate {
             FileInputStream fis = new FileInputStream(path);
             Workbook wb = WorkbookFactory.create(fis);
 
-            // ✅ Get Sheet
             Sheet sheet = wb.getSheet(sheetName);
 
             if (sheet == null) {
                 wb.close();
                 fis.close();
-                throw new RuntimeException("❌ Sheet NOT FOUND: " + sheetName);
+                throw new RuntimeException("Sheet NOT FOUND: " + sheetName);
             }
 
-            // ✅ Get Row
             Row row = sheet.getRow(rowNum);
 
             if (row == null) {
                 wb.close();
                 fis.close();
-                throw new RuntimeException("❌ Row NOT FOUND: " + rowNum);
+                throw new RuntimeException("Row NOT FOUND: " + rowNum);
             }
 
-            // ✅ Get Cell
             Cell cell = row.getCell(cellNum);
 
             if (cell == null) {
@@ -42,7 +39,6 @@ public class ExcelUtilityPartialUpdate {
                 return "";
             }
 
-            // ✅ Read Value
             DataFormatter formatter = new DataFormatter();
             String value = formatter.formatCellValue(cell);
 
@@ -52,7 +48,7 @@ public class ExcelUtilityPartialUpdate {
             return value;
 
         } catch (IOException e) {
-            throw new RuntimeException("❌ Excel Read Error: " + e.getMessage());
+            throw new RuntimeException("Excel Read Error: " + e.getMessage());
         }
     }
 }

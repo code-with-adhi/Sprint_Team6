@@ -11,7 +11,6 @@ import java.util.Map;
 import io.cucumber.datatable.DataTable;
 import java.util.List;
 import utils.excelUtility.ExcelUtilityUpdate;
-//import file_utility.Token;
 
 public class UpdateStepDefinition {
 
@@ -20,8 +19,6 @@ public class UpdateStepDefinition {
     String token;
     int bookingId;
     Response response;
-
-    // store values for validation
     String firstname;
     String lastname;
     boolean depositpaid;
@@ -32,11 +29,12 @@ public class UpdateStepDefinition {
                 "    \"username\" : \"admin\",\r\n" + //
                 "    \"password\" : \"password123\"\r\n" + //
                 "}";
-        response = RestAssured.given().contentType(ContentType.JSON).body(body)
+        response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .body(body)
                 .when().post("/auth");
 
         token = response.jsonPath().getString("token");
-        // Token.setToken(token);
     }
 
     @Given("Create a new booking")
@@ -209,8 +207,6 @@ public class UpdateStepDefinition {
                 .body(body)
                 .put("/booking/" + id);
     }
-
-    // ===== VALIDATIONS =====
 
     @Then("Validate status code should be {int}")
     public void validate_status_code(int expectedStatusCode) {

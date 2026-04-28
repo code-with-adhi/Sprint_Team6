@@ -1,4 +1,3 @@
-#Author: Rajmohan T
 Feature: Validate retrieval of Booking using Booking Id
 
   @TC_10
@@ -23,7 +22,6 @@ Feature: Validate retrieval of Booking using Booking Id
     And the response statusLine for get is "OK"
     And the response time for get is less than 5000 ms
     And the get response should contain following mandatory fields firstname, lastname, totalprice, depositpaid, checkin, checkout
-#Scenario Outline
 
   @TC_13
   Scenario Outline: TC_13 Validate booking response data values
@@ -36,7 +34,6 @@ Feature: Validate retrieval of Booking using Booking Id
     Examples:
       | firstname | lastname | totalprice | depositpaid | checkin    | checkout   |
       | Raj       | Test     |        100 | true        | 2024-01-01 | 2024-01-02 |
-#DataTable
 
   @TC_14
   Scenario: TC_14 Get error for invalid booking id

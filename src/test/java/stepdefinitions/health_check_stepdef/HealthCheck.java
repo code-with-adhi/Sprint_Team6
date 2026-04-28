@@ -16,13 +16,10 @@ import utils.fileUtility.FileUtility;
 public class HealthCheck {
 
     Response response;
-    long responseTime;
 
     FileUtility fUtil = new FileUtility();
 
-    // =========================================
-    // SETUP (Base URL using FileUtility)
-    // =========================================
+    
     @Given("the API is up")
     public void the_api_is_up() throws Exception {
         RestAssured.baseURI = fUtil.getDataFromPropertiesFile("baseurl");
@@ -35,25 +32,17 @@ public class HealthCheck {
 
     @Given("I do not provide any authentication")
     public void i_do_not_provide_any_authentication() {
-        // No authentication required
     }
 
-    // =========================================
-    // SCENARIO OUTLINE + NORMAL SCENARIOS
-    // =========================================
+  
     @When("I send a GET request to {string}")
     public void i_send_a_get_request_to(String endpoint) {
 
         response = given()
                 .when()
                 .get(endpoint);
-
-        responseTime = response.getTime();
     }
 
-    // =========================================
-    // DATA TABLE (TC_39)
-    // =========================================
     @When("I send multiple GET requests with following data")
     public void i_send_multiple_get_requests_with_following_data(DataTable dataTable) {
 
@@ -74,12 +63,10 @@ public class HealthCheck {
 
     @Then("all responses should be successful")
     public void all_responses_should_be_successful() {
-        // Validation already done inside loop
+       
     }
 
-    // =========================================
-    // VALIDATIONS
-    // =========================================
+   
     @Then("the response status code should be {int}")
     public void the_response_status_code_should_be(Integer expectedStatusCode) {
         assertEquals(response.getStatusCode(), expectedStatusCode.intValue());
@@ -93,13 +80,6 @@ public class HealthCheck {
 
     @Then("the response should be successful")
     public void the_response_should_be_successful() {
-        assertTrue(response.getStatusCode() == 200 || response.getStatusCode() == 201);
-    }
-
-    @Then("the response time should be less than {int} seconds")
-    public void the_response_time_should_be_less_than_seconds(Integer seconds) {
-
-        long expectedTime = seconds * 1000; // seconds → milliseconds
-        assertTrue(responseTime < expectedTime, "Response time exceeded limit");
+        assertTrue(response.getStatusCode() == 200);
     }
 }

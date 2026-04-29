@@ -41,6 +41,7 @@ Feature: Validate retrieval of Booking using Booking Id
       | id    |
       | 52828 |
       | abc   |
+      |    -1 |
     Then the response statuscode for get is 404
     And the response statusLine for get is "Not Found"
     And the response time for get is less than 5000 ms

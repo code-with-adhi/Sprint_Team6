@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         features = "src/test/resources/features/getAllBookingIdsFeature.feature",
         glue = {"stepdefinitions.get_all_ids_stepdef", "hooks"},
         plugin = {
-                "pretty",
+                "pretty","html:target/cucumber-GetAllId-report.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "json:target/cucumber.json"
         },
